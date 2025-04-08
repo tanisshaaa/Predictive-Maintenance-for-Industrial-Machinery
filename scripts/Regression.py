@@ -11,7 +11,7 @@ import pandas as pd
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r"C:\Users\Dell\OneDrive\Desktop\TANISHA\PROJECTS\Predictive Maintenance (PdM) for Industrial Machinery\pdm_preprocessed.csv")  # use your actual CSV filename
+    df = pd.read_csv(pdm_preprocessed.csv")  # use your actual CSV filename
     return df
 
 df = load_data()
