@@ -9,11 +9,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, roc_curve
 
-# Step 1: Connect to MySQL database (adjust username, password, dbname as needed)
-engine = create_engine("mysql+pymysql://root:tanitani@localhost/pdm_db")
+import streamlit as st
+import pandas as pd
 
-# Step 2: Load data into a DataFrame
-df = pd.read_sql("SELECT * FROM predictive_maintenance", engine)
+@st.cache_data
+def load_data():
+    df = pd.read_csv(r"C:\Users\Dell\OneDrive\Desktop\TANISHA\PROJECTS\Predictive Maintenance (PdM) for Industrial Machinery\pdm_preprocessed.csv")  # use your actual CSV filename
+    return df
+
+df = load_data()
 
 # Step 3: Set the target column
 df['FailureWithin24hrs'] = df[['TWF', 'HDF', 'PWF', 'OSF', 'RNF']].sum(axis=1)
