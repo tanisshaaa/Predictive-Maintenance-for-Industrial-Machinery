@@ -6,18 +6,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-# Connect to MySQL
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="tanitani",
-    database="pdm_db"
-)
+import streamlit as st
+import pandas as pd
 
-# Read data
-query = "SELECT * FROM predictive_maintenance"
-df = pd.read_sql(query, conn)
-conn.close()
+@st.cache_data
+def load_data():
+    df = pd.read_csv(r"C:\Users\Dell\OneDrive\Desktop\TANISHA\PROJECTS\Predictive Maintenance (PdM) for Industrial Machinery\pdm_preprocessed.csv")  # use your actual CSV filename
+    return df
+
+df = load_data()
 
 # Create regression target (modify this logic as per real failure score)
 df['FailureScore'] = df['Air_temperature_K'] * 0.2 + df['Rotational_speed_rpm'] * 0.01
