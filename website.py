@@ -14,15 +14,14 @@ st.set_page_config(page_title="🔧 Predictive Maintenance Dashboard", layout="w
 st.title("🔧 Predictive Maintenance - Model Comparison Dashboard")
 
 # ------------------- Load Data -------------------
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv(pdm_preprocessed.csv")  # use your actual CSV filename
+    df = pd.read_csv("pdm_preprocessed.csv")  # make sure this CSV file is in your repo
     return df
 
-df = load_data()
 
 
 
