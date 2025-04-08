@@ -14,18 +14,15 @@ st.set_page_config(page_title="🔧 Predictive Maintenance Dashboard", layout="w
 st.title("🔧 Predictive Maintenance - Model Comparison Dashboard")
 
 # ------------------- Load Data -------------------
+import streamlit as st
+import pandas as pd
+
 @st.cache_data
 def load_data():
-    import mysql.connector
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="tanitani",
-        database="pdm_db"
-    )
-    df = pd.read_sql("SELECT * FROM predictive_maintenance", conn)
-    conn.close()
+    df = pd.read_csv(pdm_preprocessed.csv")  # use your actual CSV filename
     return df
+
+df = load_data()
 
 
 
