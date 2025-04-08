@@ -7,17 +7,15 @@ from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# 1. Connect to MySQL and load data
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="tanitani",
-    database="pdm_db"
-)
+import streamlit as st
+import pandas as pd
 
-query = "SELECT * FROM predictive_maintenance"
-df = pd.read_sql(query, conn)
-conn.close()
+@st.cache_data
+def load_data():
+    df = pd.read_csv(r"C:\Users\Dell\OneDrive\Desktop\TANISHA\PROJECTS\Predictive Maintenance (PdM) for Industrial Machinery\pdm_preprocessed.csv")  # use your actual CSV filename
+    return df
+
+df = load_data()
 
 # 2. Preprocessing
 X = df.drop(columns=['Machine_failure'])  # Drop target column
